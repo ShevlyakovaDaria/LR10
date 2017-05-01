@@ -1,0 +1,82 @@
+﻿
+        @{
+            ViewData["Title"] = "Home Page";
+        }
+@using WebApplication2.Models;
+        @section Scripts
+{
+            <script type="text/javascript">
+
+                $(function () {
+                    $("#refresh").on("click",
+                        function () {
+                            window.refresh();
+                             });
+                        });
+
+                $("#btn-success").on("click",
+                       function () {
+                                 if (result == "OK") {
+                                        $("#sendResult").text("Done!");
+                                    }
+                                    console.log(result);
+                                });
+            </script>
+        }
+     
+            <h2>Order list</h2>
+
+            <table class="table1">
+                <thead>
+                    <tr> ID </tr>
+                    <tr> Item </tr>
+                    <tr> Count </tr>
+                    <tr> Price </tr>
+                </thead>
+                <tbody>
+          @foreach (var order in OrderData.Items)
+                  {
+                        <tr>
+                            <td id="ID">@order.Id</td>
+                            <td id="name">@order.Name</td>
+                            <td id="count">@order.Count</td>
+                            <td id="price">@order.Price</td>
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
+
+
+@model Regulars
+<form asp-controller="Home" method="post">
+    <div class="form-group">
+        <label asp-for="Id">ID</label>
+        <input asp-for="Id" type="text" class="form-control" />
+        <span class="text-danger">@Html.ValidationMessageFor(m => m.Id)</span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Name">Good</label>
+        <input asp-for="Name" type="text" class="form-control" />
+        <span class="text-danger">@Html.ValidationMessageFor(m => m.Name)</span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Count">Count</label>
+        <input asp-for="Count" type="text" class="form-control" />
+        <span class="text-danger">@Html.ValidationMessageFor(m => m.Count)</span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Price">Price</label>
+        <input asp-for="Price" type="text" class="form-control" />
+        <span class="text-danger">@Html.ValidationMessageFor(m => m.Price)</span>
+    </div>
+    <div class="form-group">
+        <button class="btn btn-success">Добавить</button>
+       
+        <p id="sendResult"></p>
+        
+    </div>
+    <hr />
+    <button id="refresh" class="btn btn-success">Обновить</button>
+</form>
+
